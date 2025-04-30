@@ -8,4 +8,6 @@
 #ifndef DRUID_H
     #define DRUID_H
 
+void *druid_entrypoint(void *arg);
+
 #endif //DRUID_H

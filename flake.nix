@@ -13,6 +13,7 @@
         devShells.default = pkgs.mkShell.override {stdenv = pkgs.multiStdenv;} {
           packages = with pkgs; [
             gnumake
+            valgrind
           ];
         };
 

@@ -15,7 +15,7 @@ CFLAGS	+=	-Wundef
 CFLAGS	+=	-Wshadow
 CFLAGS	+=	-Wunreachable-code
 CFLAGS	+=	-pedantic
-CFLAGS	+=	-iquote include/
+CFLAGS	+=	-iquote include/ -g3
 CFLAGS	+=	-MMD -MP
 
 BDIR	=	.build
