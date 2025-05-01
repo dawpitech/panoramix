@@ -20,6 +20,7 @@ typedef struct {
     pthread_mutex_t potion_access_mtx;
     int remaining_potions;
     pthread_mutex_t stdout_available;
+    bool all_villagers_asleep;
 } context_t;
 
 typedef struct {

@@ -24,6 +24,7 @@ static void druid_say(const druid_data_t *druid_data, char *fmt, ...)
 }
 
 // ReSharper disable once CppParameterMayBeConstPtrOrRef
+// ReSharper disable CppDFAConstantFunctionResult
 void *druid_entrypoint(void *arg)
 {
     druid_t *druid = (druid_t *) arg;
@@ -33,6 +34,8 @@ void *druid_entrypoint(void *arg)
 
     while (druid_data->remaining_refills > 0) {
         sem_wait(&druid_data->context->not_enough_potion_sem);
+        if (druid_data->context->all_villagers_asleep)
+            return NULL;
         druid_data->remaining_refills -= 1;
         druid_data->context->remaining_potions = druid_data->pot_size;
         druid_say(druid_data, "Ah! Yes, yes, I'm awake! Working on it! "

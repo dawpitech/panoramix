@@ -75,6 +75,8 @@ static void launch_threads(const village_t *village)
 
     for (int i = 0; i < village->nb_villagers; i++)
         pthread_join(village->villagers[i].thread, NULL);
+    village->context->all_villagers_asleep = true;
+    sem_post(&village->context->not_enough_potion_sem);
     pthread_join(village->druid->thread, NULL);
 }
 
