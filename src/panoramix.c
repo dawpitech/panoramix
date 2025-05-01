@@ -80,6 +80,19 @@ static void launch_threads(const village_t *village)
     pthread_join(village->druid->thread, NULL);
 }
 
+// after bisous with Maxime
+static void destroy_the_gaule(const village_t *village)
+{
+    sem_destroy(&village->context->refill_occurred_sem);
+    sem_destroy(&village->context->not_enough_potion_sem);
+    pthread_mutex_destroy(&village->context->potion_access_mtx);
+    pthread_mutex_destroy(&village->context->stdout_available);
+
+    free(village->villagers);
+    free(village->druid);
+    free(village->context);
+}
+
 int main(const int argc, const char **argv)
 {
     village_t gaule = {0};
@@ -88,6 +101,6 @@ int main(const int argc, const char **argv)
         return EXIT_FAILURE_TECH;
 
     launch_threads(&gaule);
-
-    return 0;
+    destroy_the_gaule(&gaule);
+    return EXIT_SUCCESS;
 }
