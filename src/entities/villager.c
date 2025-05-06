@@ -28,8 +28,8 @@ void *villager_entrypoint(void *arg)
 {
     const villager_t *villager = arg;
     villager_data_t villager_data = villager->villager_data;
-    villager_say(&villager_data, "Going into battle!\n");
 
+    villager_say(&villager_data, "Going into battle!\n");
     while (villager_data.remaining_fights > 0) {
         pthread_mutex_lock(&villager_data.context->potion_access_mtx);
         villager_say(&villager_data, "I need a drink... I see %d servings "
@@ -42,10 +42,8 @@ void *villager_entrypoint(void *arg)
         }
         villager_data.context->remaining_potions -= 1;
         pthread_mutex_unlock(&villager_data.context->potion_access_mtx);
-        villager_data.remaining_fights -= 1;
         villager_say(&villager_data, "Take that roman scum! Only %d "
-            "left.\n", villager_data.remaining_fights);
+            "left.\n", --villager_data.remaining_fights);
     }
-    villager_say(&villager_data, "I'm going to sleep now.\n");
-    return NULL;
+    return villager_say(&villager_data, "I'm going to sleep now.\n"), NULL;
 }
