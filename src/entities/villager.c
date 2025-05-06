@@ -32,7 +32,7 @@ void *villager_entrypoint(void *arg)
 
     while (villager_data.remaining_fights > 0) {
         pthread_mutex_lock(&villager_data.context->potion_access_mtx);
-        villager_say(&villager_data, "I need a drink... I see %d serving "
+        villager_say(&villager_data, "I need a drink... I see %d servings "
             "left.\n", villager_data.context->remaining_potions);
         if (villager_data.context->remaining_potions <= 0) {
             villager_say(&villager_data, "Hey Pano wake up! We need more "
