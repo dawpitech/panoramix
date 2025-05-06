@@ -63,8 +63,8 @@ static int village_init(village_t *village)
 static void launch_threads(const village_t *village)
 {
     for (int i = 0; i < village->nb_villagers; i++) {
-        village->villagers[i].villager_data.id = i + 1;
         village->villagers[i].villager_data.remaining_fights = village->nb_fights;
+        village->villagers[i].villager_data.id = i;
         village->villagers[i].villager_data.context = village->context;
     }
 
